@@ -58,11 +58,14 @@ fi
 
 DARCH=$(uname -m)
 
-if [ "$DARCH" == "aarch64" ]; then
-  DARCH="arm64"
-elif [[ $DARCH == *"arm"* ]]; then
-  DARCH="arm"
-fi
+case "$DARCH" in
+  aarch64)
+    DARCH="arm64"
+    ;;
+  *arm*)
+    DARCH="arm"
+    ;;
+esac
 
 DEVKIT_URL="https://github.com/frida/frida/releases/download/$FRIDA_VERSION/frida-core-devkit-$FRIDA_VERSION-android-$DARCH.tar.xz"
 
